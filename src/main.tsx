@@ -54,7 +54,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         fetcher: (url: string) =>
           axios
             .get(url, {
-              baseURL: import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api/v1",
+              baseURL: import.meta.env.VITE_API_URL,
             })
             .then((res) => res.data),
       }}
