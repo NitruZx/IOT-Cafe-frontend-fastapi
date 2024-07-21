@@ -33,7 +33,7 @@ export default function BookByIdPage() {
               <p className="italic text-neutral-500 mb-4">โดย {book.author}</p>
               <div className="grid grid-cols-1 lg:grid-cols-3">
                 <img
-                  src="https://placehold.co/150x200"
+                  src={book.image_url ? book.image_url : "https://placehold.co/150x200"}
                   alt={book.title}
                   className="w-full object-cover aspect-[3/4]"
                 />
@@ -41,18 +41,13 @@ export default function BookByIdPage() {
                   <h3>รายละเอียดหนังสือ</h3>
                   <p className="indent-4">
                     {/* TODO: เพิ่มรายละเอียดหนังสือ */}
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, neque.
-                    Necessitatibus nihil quibusdam molestiae, asperiores nesciunt quod aliquid
-                    accusamus iusto sint amet optio laudantium eius, facilis iure ipsa assumenda
-                    alias pariatur! Quis ad ratione amet fugiat, et culpa cupiditate, veritatis
-                    beatae sed voluptatum a reprehenderit id odit quas? Enim, earum?
+                    {book.description ? book.description : <p className="text-gray-300 text-sm">ไม่มีรายละเอียดหนังสือ</p>}
                   </p>
 
                   <h3>เรื่องย่อ</h3>
                   <p className="indent-4">
                     {/* TODO: เพิ่มเรื่องย่อ */}
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia officiis amet nemo
-                    ut placeat aliquam neque id voluptates quod nihil.
+                    {book.synopsis ? book.synopsis : <p className="text-gray-300 text-sm">ไม่มีการใส่เรื่องย่อ</p>}
                   </p>
 
                   <h3>หมวดหมู่</h3>

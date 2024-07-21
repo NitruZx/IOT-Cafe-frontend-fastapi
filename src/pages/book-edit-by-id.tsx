@@ -2,7 +2,16 @@ import useSWR from "swr";
 import { Book } from "../lib/models";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/layout";
-import { Alert, Button, Checkbox, Container, Divider, NumberInput, TextInput } from "@mantine/core";
+import {
+  Alert,
+  Button,
+  Checkbox,
+  Container,
+  Divider,
+  NumberInput,
+  TextInput,
+  Textarea,
+} from "@mantine/core";
 import Loading from "../components/loading";
 import { IconAlertTriangleFilled, IconTrash } from "@tabler/icons-react";
 import { isNotEmpty, useForm } from "@mantine/form";
@@ -69,7 +78,8 @@ export default function BookEditById() {
       } else {
         notifications.show({
           title: "เกิดข้อผิดพลาดบางอย่าง",
-          message: "กรุณาลองใหม่อีกครั้ง หรือดูที่ Console สำหรับข้อมูลเพิ่มเติม",
+          message:
+            "กรุณาลองใหม่อีกครั้ง หรือดูที่ Console สำหรับข้อมูลเพิ่มเติม",
           color: "red",
         });
       }
@@ -106,7 +116,8 @@ export default function BookEditById() {
       } else {
         notifications.show({
           title: "เกิดข้อผิดพลาดบางอย่าง",
-          message: "กรุณาลองใหม่อีกครั้ง หรือดูที่ Console สำหรับข้อมูลเพิ่มเติม",
+          message:
+            "กรุณาลองใหม่อีกครั้ง หรือดูที่ Console สำหรับข้อมูลเพิ่มเติม",
           color: "red",
         });
       }
@@ -142,7 +153,10 @@ export default function BookEditById() {
 
           {!!book && (
             <>
-              <form onSubmit={bookEditForm.onSubmit(handleSubmit)} className="space-y-8">
+              <form
+                onSubmit={bookEditForm.onSubmit(handleSubmit)}
+                className="space-y-8"
+              >
                 <TextInput
                   label="ชื่อหนังสือ"
                   placeholder="ชื่อหนังสือ"
@@ -153,6 +167,20 @@ export default function BookEditById() {
                   label="ชื่อผู้แต่ง"
                   placeholder="ชื่อผู้แต่ง"
                   {...bookEditForm.getInputProps("author")}
+                />
+
+                <Textarea
+                  label="รายละเอียดหนังสือ"
+                  description="ใส่รายละเอียดของหนังสือ"
+                  placeholder="รายละเอียดหนังสือ..."
+                  {...bookEditForm.getInputProps("description")}
+                />
+
+                <Textarea
+                  label="เรื่องย่อ"
+                  description="ใส่เนื้อเรื่องย่อ"
+                  placeholder="เรื่องราวมันเริ่มเมื่อตอนที่พบเครื่องมือเอเลี่ยนประหลาด..."
+                  {...bookEditForm.getInputProps("synopsis")}
                 />
 
                 <NumberInput
@@ -174,6 +202,12 @@ export default function BookEditById() {
                   })}
                 />
 
+                <TextInput
+                  label="Url รูปภาพ"
+                  placeholder="https://image.com"
+                  {...bookEditForm.getInputProps("image_url")}
+                />
+
                 <Divider />
 
                 <div className="flex justify-between">
@@ -186,7 +220,8 @@ export default function BookEditById() {
                         title: "คุณต้องการลบหนังสือเล่มนี้ใช่หรือไม่",
                         children: (
                           <span className="text-xs">
-                            เมื่อคุณดำนเนินการลบหนังสือเล่มนี้แล้ว จะไม่สามารถย้อนกลับได้
+                            เมื่อคุณดำนเนินการลบหนังสือเล่มนี้แล้ว
+                            จะไม่สามารถย้อนกลับได้
                           </span>
                         ),
                         labels: { confirm: "ลบ", cancel: "ยกเลิก" },
