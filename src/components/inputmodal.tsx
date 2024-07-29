@@ -4,10 +4,11 @@ import { IconPlus } from "@tabler/icons-react";
 
 interface ModalProps {
   children: React.ReactNode;
+  title: string;
   text: string;
 }
 
-export default function InputModal({ children, text }: ModalProps) {
+export default function InputModal({ children, title, text }: ModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -15,7 +16,7 @@ export default function InputModal({ children, text }: ModalProps) {
       <Modal
         opened={opened}
         onClose={close}
-        title="เพิ่มหนังสือในระบบ"
+        title={title}
         centered
       >
         <main>{children}</main>

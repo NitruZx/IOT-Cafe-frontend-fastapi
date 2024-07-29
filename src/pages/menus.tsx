@@ -2,12 +2,11 @@ import Layout from "../components/layout";
 import InputModal from "../components/inputmodal";
 import cafeBackgroundImage from "../assets/images/bg-cafe-2.jpg";
 import useSWR from "swr";
-import { Book } from "../lib/models";
+import { Menu } from "../lib/models";
 import Loading from "../components/loading";
 import {
   Alert,
   Button,
-  Checkbox,
   Divider,
   NumberInput,
   TextInput,
@@ -20,39 +19,36 @@ import { useState } from "react";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import axios, { AxiosError } from "axios";
-
-export default function BooksPage() {
-  const { data: books, error } = useSWR<Book[]>("/books");
+export default function MenusPage() {
+  const { data: menus, error } = useSWR<Menu[]>("/menus");
 
   const navigate = useNavigate();
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const bookCreateForm = useForm({
+  const menuCreateForm = useForm({
     initialValues: {
-      title: "",
-      author: "",
-      year: 2024,
-      is_published: false,
+      menu_name: "",
+      menu_description: "",
+      menu_price: 0,
     },
 
     validate: {
-      title: isNotEmpty("กรุณาระบุชื่อหนังสือ"),
-      author: isNotEmpty("กรุณาระบุชื่อผู้แต่ง"),
-      year: isNotEmpty("กรุณาระบุปีที่พิมพ์หนังสือ"),
+      menu_name: isNotEmpty("กรุณาระบุชื่อเมนู"),
+      menu_price: isNotEmpty("กรุณาระบุราคา"),
     },
   });
 
-  const handleSubmit = async (values: typeof bookCreateForm.values) => {
+  const handleSubmit = async (values: typeof menuCreateForm.values) => {
     try {
       setIsProcessing(true);
-      const response = await axios.post<Book>(`/books`, values);
+      const response = await axios.post<Menu>(`/menus`, values);
       notifications.show({
-        title: "เพิ่มข้อมูลหนังสือสำเร็จ",
-        message: "ข้อมูลหนังสือได้รับการเพิ่มเรียบร้อยแล้ว",
+        title: "เพิ่มเมนูสำเร็จ",
+        message: "ได้เพิ่มเมนูเรียบร้อยแล้ว",
         color: "teal",
       });
-      navigate(`/books/${response.data.id}`);
+      navigate(`/menus/${response.data.menu_id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 422) {
@@ -90,66 +86,43 @@ export default function BooksPage() {
             backgroundImage: `url(${cafeBackgroundImage})`,
           }}
         >
-          <h1 className="text-5xl mb-2">หนังสือ</h1>
-          <h2>รายการหนังสือทั้งหมด</h2>
+          <h1 className="text-5xl mb-2">เมนูเครื่องดื่ม</h1>
+          <h2>รายการเมนูทั้งหมด</h2>
         </section>
 
         <section className="container mx-auto py-8">
           <div className="flex justify-between pb-5">
-            <h1>รายการหนังสือ</h1>
+            <h1>รายการเมนู</h1>
 
-            <InputModal text="เพิ่มหนังสือ" title="เพิ่มหนังสือในระบบ">
+            <InputModal text="เพิ่มเมนู" title="เพิ่มเมนูในระบบ">
               <form
-                onSubmit={bookCreateForm.onSubmit(handleSubmit)}
+                onSubmit={menuCreateForm.onSubmit(handleSubmit)}
                 className="space-y-8"
               >
                 <TextInput
-                  label="ชื่อหนังสือ"
-                  placeholder="ชื่อหนังสือ"
-                  {...bookCreateForm.getInputProps("title")}
-                />
-
-                <TextInput
-                  label="ชื่อผู้แต่ง"
-                  placeholder="ชื่อผู้แต่ง"
-                  {...bookCreateForm.getInputProps("author")}
+                  label="ชื่อเมนู"
+                  placeholder="ชื่อเมนู"
+                  {...menuCreateForm.getInputProps("menu_name")}
                 />
 
                 <Textarea
-                  label="รายละเอียดหนังสือ"
-                  description="ใส่รายละเอียดของหนังสือ"
-                  placeholder="รายละเอียดหนังสือ..."
-                  {...bookCreateForm.getInputProps("description")}
-                />
-
-                <Textarea
-                  label="เรื่องย่อ"
-                  description="ใส่เนื้อเรื่องย่อ"
-                  placeholder="เรื่องราวมันเริ่มเมื่อตอนที่พบเครื่องมือเอเลี่ยนประหลาด..."
-                  autosize
-                  minRows={2}
-                  {...bookCreateForm.getInputProps("synopsis")}
+                  label="รายละเอียดเมนู"
+                  description="ใส่รายละเอียดของเมนู"
+                  placeholder="รายละเอียดเมนู..."
+                  {...menuCreateForm.getInputProps("menu_description")}
                 />
 
                 <NumberInput
-                  label="ปีที่พิมพ์"
-                  placeholder="ปีที่พิมพ์"
-                  min={1900}
-                  max={new Date().getFullYear() + 1}
-                  {...bookCreateForm.getInputProps("year")}
-                />
-
-                <Checkbox
-                  label="เผยแพร่"
-                  {...bookCreateForm.getInputProps("is_published", {
-                    type: "checkbox",
-                  })}
+                  label="ราคา (บาท)"
+                  placeholder="ราคา"
+                  min={0}
+                  {...menuCreateForm.getInputProps("menu_price")}
                 />
 
                 <TextInput
-                  label="Url รูปภาพ"
+                  label="รูปภาพเมนู (Url)"
                   placeholder="https://image.com"
-                  {...bookCreateForm.getInputProps("image_url")}
+                  {...menuCreateForm.getInputProps("menu_image")}
                 />
 
                 <Divider />
@@ -161,7 +134,7 @@ export default function BooksPage() {
             </InputModal>
           </div>
 
-          {!books && !error && <Loading />}
+          {!menus && !error && <Loading />}
           {error && (
             <Alert
               color="red"
@@ -173,27 +146,33 @@ export default function BooksPage() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {books?.map((book) => (
+            {menus?.map((menu) => (
               <div
                 className="border border-solid border-neutral-200"
-                key={book.id}
+                key={menu.menu_id}
               >
                 <img
-                  src={book.image_url ? book.image_url : "https://placehold.co/150x200"}
-                  alt={book.title}
-                  className="w-full object-cover aspect-[3/4]"
+                  src={
+                    menu.menu_image
+                      ? menu.menu_image
+                      : "https://placehold.co/150x200"
+                  }
+                  alt={menu.menu_name}
+                  className="w-full object-cover aspect-[3/3]"
                 />
                 <div className="p-4">
                   <h2 className="text-lg font-semibold line-clamp-2">
-                    {book.title}
+                    {menu.menu_name}
                   </h2>
-                  <p className="text-xs text-neutral-500">โดย {book.author}</p>
+                  <p className="text-xs text-neutral-500">
+                    โดย {menu.menu_description}
+                  </p>
                 </div>
 
                 <div className="flex justify-end px-4 pb-2">
                   <Button
                     component={Link}
-                    to={`/books/${book.id}`}
+                    to={`/menus/${menu.menu_id}`}
                     size="xs"
                     variant="default"
                   >
