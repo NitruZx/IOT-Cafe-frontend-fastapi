@@ -42,11 +42,12 @@ export default function OrdersPage() {
       <Accordion.Item value={String(row.order_id)} key={row.order_id}>
         <Accordion.Control>
           <div className="flex gap-4 justify-between">
-            <div className="w-1/3">
-              <b>#Q{row.order_id}</b>
+            <div className="w-1/4">
+              <b>#Q{row?.order_id}</b>
             </div>
-            <div className="w-1/3">{row.order_name}</div>
-            <div className="w-1/3">${row.total_price}</div>
+            <div className="w-1/4">{new Date(row.order_on ?? 0).toLocaleString()}</div>
+            <div className="w-1/4">{row?.order_name}</div>
+            <div className="w-1/4">${row?.total_price}</div>
             <ActionIcon size="lg" variant="subtle" color="gray">
               <Group>
                 <Button
@@ -79,7 +80,7 @@ export default function OrdersPage() {
                   <Table.Tr key={item.menu_id}>
                     <Table.Td>{item.menu_name}</Table.Td>
                     <Table.Td>{item.quantity}</Table.Td>
-                    <Table.Td>{item.menu_option}</Table.Td>
+                    <Table.Td>{item.menu_option?.length > 0 ? (item.menu_option) : ("-")}</Table.Td>
                   </Table.Tr>
                 ))}
               </Table.Tbody>
@@ -103,13 +104,17 @@ export default function OrdersPage() {
           <h2>รายการสั่งอาหารและเครื่องดื่มทั้งหมด</h2>
         </section>
         <section className="container mx-auto py-8">
-          <div className="flex justify-between flex-col gap-3 p-10 rounded-md bg-neutral-50">
+          <div className="flex justify-center flex-col gap-3 p-10 rounded-md bg-neutral-50">
             <h1>Orders</h1>
             { orders && orders?.length > 0 ? (
               <Accordion variant="contained" radius="md" chevronPosition="left" multiple>
               {rows}
             </Accordion>
-            ) : ("ยังไม่มีรายการสั่งเมนู")}
+            ) : (
+              <div className="rounded-lg bg-neutral-100 text-center italic text-neutral-400 p-5 select-none">
+                ยังไม่มีรายการที่สั่ง
+              </div>
+            )}
           </div>
         </section>
       </Layout>

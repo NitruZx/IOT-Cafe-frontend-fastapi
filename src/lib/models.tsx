@@ -24,4 +24,5 @@ export interface Order {
   order_tel: string;
   order_item: string;
   total_price: number;
+  order_on: string | undefined;
 }

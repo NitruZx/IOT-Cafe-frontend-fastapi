@@ -133,9 +133,11 @@ export default function MenusPage() {
         order_tel: values.order_tel,
         order_item: JSON.stringify(cartItems),
         total_price: totalAmount,
+        order_on: undefined,
       };
       await axios.post("/orders", order);
       setCartItems([]);
+      setCurrentOption([]);
       localStorage.removeItem("cart");
 
       notifications.show({
