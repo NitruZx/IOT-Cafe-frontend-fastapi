@@ -33,7 +33,10 @@ export default function BooksPage() {
       title: "",
       author: "",
       year: 2024,
+      sypnosis: "",
+      description: "",
       is_published: false,
+      category: ""
     },
 
     validate: {
