@@ -17,6 +17,8 @@ export default function BookCreatePage() {
       title: "",
       author: "",
       year: 2024,
+      sypnosis: "",
+      description: "",
       is_published: false,
     },
 
