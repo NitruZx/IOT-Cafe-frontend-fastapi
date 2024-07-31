@@ -4,7 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import { Menu } from "../lib/models";
 import useSWR from "swr";
 import Loading from "../components/loading";
-import { IconAlertTriangleFilled, IconEdit } from "@tabler/icons-react";
+import {
+  IconAlertTriangleFilled,
+  IconEdit,
+  IconArrowLeft,
+} from "@tabler/icons-react";
 
 export default function MenuByIdPage() {
   const { menuId } = useParams();
@@ -29,22 +33,33 @@ export default function MenuByIdPage() {
 
           {!!menu && (
             <>
+              <div className="pb-5 flex justify-end">
+                <Button
+                  variant="outline"
+                  radius="lg"
+                  component={Link}
+                  to={`/menus`}
+                  leftSection={<IconArrowLeft />}
+                >
+                  ย้อนกลับ
+                </Button>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-3">
                 <img
+                  draggable="false"
                   src={
                     menu.menu_image
                       ? menu.menu_image
                       : "https://placehold.co/150x200"
                   }
                   alt={menu.menu_image}
-                  className="w-full object-cover aspect-[3/4]"
+                  className="w-full object-cover aspect-[3/4] rounded-xl select-none"
                 />
                 <div className="col-span-2 px-4 space-y-2 py-4">
                   <h1>{menu.menu_name}</h1>
                   <h3>ราคา</h3>
-                  <p className="indent-4">
-                    {menu.menu_price} บาท
-                  </p>
+                  <p className="indent-4">{menu.menu_price} บาท</p>
                   <h3>รายละเอียด</h3>
                   <p className="indent-4">
                     {/* TODO: เพิ่มรายละเอียดหนังสือ */}

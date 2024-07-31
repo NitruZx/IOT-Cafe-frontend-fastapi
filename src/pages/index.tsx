@@ -32,13 +32,10 @@ export default function HomePage() {
           </div>
         </div>
         <p className="text-right mt-8">
-          ปัจจุบันค่าเฟ่ และห้องสมุดของเรา อยู่ในช่วงการดูแลของ ....
-          {/* TODO: ชื่อของตนเอง, รหัสประจำตัวนักศึกษา และแนะนำคาเฟ่นี้ต่ออีกสักหน่อย + ใส่รูปของตนเอง (ไม่จำเป็นหากไม่สะดวกใจใส่รูป) */}
-          ซึ่งมีบริการ... Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-          placeat sit ea sapiente officia sunt cumque impedit, reiciendis quis eius asperiores!
-          Minus, mollitia? Vitae inventore odio quod ducimus similique, expedita sequi, reiciendis
-          rem recusandae impedit voluptatibus quo veritatis ut quis et suscipit? Eligendi, neque!
-          Earum quaerat unde similique totam. Pariatur!
+          ปัจจุบันห้องสมุดของเรา (ที่ทำกาแฟได้นิดหน่อย) อยู่ในช่วงการดูแลของ <b>นายเจษฎา แต่งสุวรรณ์ </b>
+          ซึ่งมีบริการน้ำดื่มอร่อยคาเฟอีนเข้มรสชาตินุ่มนวลให้คุณลูกค้าเลือกสรรค์มาดื่ม เพื่อประสบการณ์การอ่านหนังสืออย่างเพลิดเพลิน ไม่ว่าจะช่วงเวลาเช้าสายบ่ายเย็นก็ตาตื่นสว่างเสมอ 
+          เนื่องจากหนังสือในร้านค่อยข้างมีเนื้อหาแน่นและเข้มข้นจึงเหมาะกับเครื่องดื่มในร้านเราเป็นอย่างมาก หนังสือแต่ละเล่มถูกคัดมาอย่างดีว่าคุณลูกค้าจะต้องได้รับเรื่องราวที่น่าตื่นเต้นกลับไปนอนคิดบนเตียงก่อนนอน
+          มีหลากหลายแนวให้เลือก โดยคุณลูกค้าสามารถนั่งที่คาแฟเราได้ไม่จำกัดเวลา ดื่มด่ำกับรสชาติกาแฟและเนื้อเรื่องได้อย่างสุดซึ้ง เพื่อช่วงเวลาอันผ่อนคลายที่ล้ำค่านี้
         </p>
       </section>
 

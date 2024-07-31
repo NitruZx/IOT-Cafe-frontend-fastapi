@@ -191,10 +191,6 @@ export default function BookEditById() {
                   {...bookEditForm.getInputProps("year")}
                 />
 
-                {/* TODO: เพิ่มรายละเอียดหนังสือ */}
-                {/* TODO: เพิ่มเรื่องย่อ */}
-                {/* TODO: เพิ่มหมวดหมู่(s) */}
-
                 <Checkbox
                   label="เผยแพร่"
                   {...bookEditForm.getInputProps("is_published", {
@@ -206,6 +202,13 @@ export default function BookEditById() {
                   label="Url รูปภาพ"
                   placeholder="https://image.com"
                   {...bookEditForm.getInputProps("image_url")}
+                />
+
+                <TextInput
+                  label="ประเภทหนังสือ"
+                  description="ใส่ , ในการคั่นแต่ประเภท เช่น sci-fi, action, adventure"
+                  placeholder="ประเภทหนังสือ"
+                  {...bookEditForm.getInputProps("category")}
                 />
 
                 <Divider />

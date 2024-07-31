@@ -151,6 +151,12 @@ export default function BooksPage() {
                   placeholder="https://image.com"
                   {...bookCreateForm.getInputProps("image_url")}
                 />
+                <TextInput
+                  label="ประเภทหนังสือ"
+                  description="ใส่ , ในการคั่นแต่ประเภท เช่น sci-fi, action, adventure"
+                  placeholder="ประเภทหนังสือ"
+                  {...bookCreateForm.getInputProps("category")}
+                />
 
                 <Divider />
 
@@ -179,9 +185,14 @@ export default function BooksPage() {
                 key={book.id}
               >
                 <img
-                  src={book.image_url ? book.image_url : "https://placehold.co/150x200"}
+                  draggable="false"
+                  src={
+                    book.image_url
+                      ? book.image_url
+                      : "https://placehold.co/150x200"
+                  }
                   alt={book.title}
-                  className="w-full object-cover aspect-[3/4]"
+                  className="w-full object-cover aspect-[3/4] select-none"
                 />
                 <div className="p-4">
                   <h2 className="text-lg font-semibold line-clamp-2">
